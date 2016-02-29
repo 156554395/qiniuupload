@@ -5,7 +5,9 @@
 
 
 $(function() {
-    var btn='pickfiles',upUrl=$('#'+btn).attr('data-source'),imgUrl=$('#'+btn).attr('data-img-url');
+    var btn='upload-files',
+        upUrl=$('#'+btn).attr('data-source'),
+        imgUrl=$('#'+btn).attr('data-img-url'),target=$('#'+btn).attr('data-target');
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
         browse_button: btn,
@@ -33,23 +35,22 @@ $(function() {
         log_level: 5,
         init: {
             'FilesAdded': function(up, files) {
-                $('table').show();
                 $('#success').hide();
                 plupload.each(files, function(file) {
-                    var progress = new FileProgress(file, 'file-list');
+                    var progress = new FileProgress(file, target);
                     progress.setStatus("等待...");
                     progress.bindUploadCancel(up);
                 });
             },
             'BeforeUpload': function(up, file) {
-                var progress = new FileProgress(file, 'file-list');
+                var progress = new FileProgress(file, target);
                 var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
                 if (up.runtime === 'html5' && chunk_size) {
                     progress.setChunkProgess(chunk_size);
                 }
             },
             'UploadProgress': function(up, file) {
-                var progress = new FileProgress(file, 'file-list');
+                var progress = new FileProgress(file, target);
                 var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
                 progress.setProgress(file.percent + "%", file.speed, chunk_size);
             },
@@ -57,12 +58,11 @@ $(function() {
                 $('#success').show();
             },
             'FileUploaded': function(up, file, info) {
-                var progress = new FileProgress(file, 'file-list');
+                var progress = new FileProgress(file, target);
                 progress.setComplete(up, info);
             },
             'Error': function(up, err, errTip) {
-                $('table').show();
-                var progress = new FileProgress(err.file, 'file-list');
+                var progress = new FileProgress(err.file,target);
                 progress.setError();
                 progress.setStatus(errTip);
             }
