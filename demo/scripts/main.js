@@ -7,14 +7,14 @@
 $(function() {
     var btn='upload-files',
         upUrl=$('#'+btn).attr('data-source'),
-        imgUrl=$('#'+btn).attr('data-img-url'),target=$('#'+btn).attr('data-target');
+        imgUrl=$('#'+btn).attr('data-img-url'),target=$('#'+btn).attr('data-target'),swf=$('#'+btn).attr('data-swf');
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
         browse_button: btn,
         container: 'container',
         drop_element: 'container',
-        max_file_size: '1000mb',
-        flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
+        max_file_size: '500mb',
+        flash_swf_url: swf,
         dragdrop: true,
         chunk_size: '4mb',
         uptoken_url: upUrl,
