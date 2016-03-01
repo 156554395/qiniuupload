@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="col-md-12 ">
-            <ul class="render-box" id="file-list" data-up-before="tpl-up-before" data-up-after="tpl-up-after"></ul>
+            <div class="render-box list" id="file-list" data-up-before="tpl-up-before" data-up-after="tpl-up-after"></div>
             <!--<table class="table table-striped table-hover text-left"   style="margin-top:40px;display:none">-->
             <!--<thead>-->
             <!--<tr>-->
@@ -82,13 +82,14 @@
 <!--上传前模板-->
 <script id="tpl-up-before" type="text/html">
     <div class="up-item" id="{{id}}">
-        <div class="filename">{{fileName}}</div>
-        <div class="data-status">准备上传</div>
-        <div class="data-size">{{fileSize}}</div>
+        <span class="name">{{fileName}}</span>
+        <span class="status">准备上传</span>
+        <span class="size">{{fileSize}}</span>
+        <span class="cancel">取消</span>
     </div>
 </script>
 <script id="tpl-up-after" type="text/html">
-    <div class="img"><img src="{{if isImage}}<%= domain %>{{key}}?imageView2/1/w/100/h/80{{else}}images/default.png{{/if}}" alt=""/></div>
+    <div class="img"><img src="{{if isImage}}<%= domain %>{{key}}?imageView2/5/w/64/h/64{{else}}images/default.png{{/if}}" alt=""/></div>
 </script>
 </body>
 </html>
