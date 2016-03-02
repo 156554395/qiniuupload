@@ -16,8 +16,6 @@ function FileProgress(file, targetID) {
     } else {
         this.reset();
     }
-
-    //this.height = this.fileProgressWrapper.offset().top;
     this.setTimer(null);
 }
 

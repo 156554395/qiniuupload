@@ -110,10 +110,8 @@ function QiniuJsSDK() {
             for (var i = 0; i < args.length; i++) {
                 msg+=that.stringifyJSON(args[i]);
             }
-            console.log(msg);
         }else{
             args.unshift(header);
-            console.log.apply(console, args);
         }
     }
 
