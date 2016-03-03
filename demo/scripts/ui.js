@@ -1,14 +1,15 @@
 /*global plupload */
 /*global qiniu */
-function FileProgress(file, targetID) {
+function FileProgress(file, targetID,temp) {
     this.fileProgressID = file.id;
     this.file = file;
     this.opacity = 100;
     this.height = 0;
     this.fileProgressWrapper = $('#' + this.fileProgressID);
     this.target = $('#' + targetID);
-    this.beforeTemp=this.target.attr('data-up-before');
-    this.aftereTemp=this.target.attr('data-up-after');
+    this.beforeTemp=temp['before'];
+    this.ing=temp['ing'];
+    this.aftereTemp=temp['after'];
     if (!this.fileProgressWrapper.length) {
         var data = {fileName: file.name, id: file.id, fileSize: plupload.formatSize(file.size).toUpperCase()};
         var html = template(this.beforeTemp, data);
@@ -41,13 +42,13 @@ FileProgress.prototype.setChunkProgess = function (chunk_size) {
 FileProgress.prototype.setProgress = function (percentage, speed, chunk_size) {
     var file = this.file;
     var uploaded = file.loaded;
-
     var size = plupload.formatSize(uploaded).toUpperCase();
     var formatSpeed = plupload.formatSize(speed).toUpperCase();
     if (this.fileProgressWrapper.find('.status').text() === '取消上传') {
         return;
     }
-    this.fileProgressWrapper.find('.status').text("已上传: " + size + " 上传速度： " + formatSpeed + "/s");
+    var html=template(this.ing,{speed:formatSpeed,completed:size,percentage:percentage});
+    this.fileProgressWrapper.find('.status').html(html);
     percentage = parseInt(percentage, 10);
     if (file.status !== plupload.DONE && percentage === 100) {
         percentage = 99;
@@ -101,7 +102,6 @@ FileProgress.prototype.bindUploadCancel = function (up) {
         self.fileProgressWrapper.find('td:eq(2) .progressCancel').on('click', function () {
             self.setCancelled(false);
             self.setStatus("取消上传");
-            self.fileProgressWrapper.find('.status').css('left', '0');
             up.removeFile(self.file);
         });
     }

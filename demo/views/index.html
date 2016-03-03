@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>七牛云存储 - JavaScript SDK</title>
-    <link href="images/favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/highlight.css">
@@ -42,7 +41,7 @@
         <div class="col-md-12">
             <div id="container">
                 <a class="btn btn-default btn-lg " id="upload-files"  data-target="file-list"  data-img-url="<%= domain %>"
-                   data-source="<%= uptoken_url %>" data-swf="/scripts/up.swf">
+                   data-source="<%= uptoken_url %>" data-swf="/scripts/up.swf" data-up-before="tpl-up-before" data-up-ing="tpl-uploading" data-up-after="tpl-up-after">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>选择文件</span>
                 </a>
@@ -55,7 +54,7 @@
             </div>
         </div>
         <div class="col-md-12 ">
-            <div class="render-box list" id="file-list" data-up-before="tpl-up-before" data-up-after="tpl-up-after"></div>
+            <div class="render-box list" id="file-list"></div>
             <!--<table class="table table-striped table-hover text-left"   style="margin-top:40px;display:none">-->
             <!--<thead>-->
             <!--<tr>-->
@@ -85,6 +84,11 @@
         <span class="cancel">取消</span>
     </div>
 </script>
+<!--上传中-->
+<script id="tpl-uploading" type="text/html">
+    已上传: {{completed}} 上传速度： {{speed}}/s 上传进度 {{percentage}}
+</script>
+<!--上传后模板-->
 <script id="tpl-up-after" type="text/html">
     <div class="img"><img src="{{if isImage}}<%= domain %>{{key}}?imageView2/5/w/64/h/64{{else}}images/default.png{{/if}}" alt=""/></div>
 </script>

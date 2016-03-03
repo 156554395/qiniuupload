@@ -67,6 +67,12 @@ app.get('/', function(req, res) {
         uptoken_url: config.Uptoken_Url
     });
 });
+app.get('/test', function(req, res) {
+    res.render('test.html', {
+        domain: config.Domain,
+        uptoken_url: config.Uptoken_Url
+    });
+});
 
 app.get('/multiple', function(req, res) {
     res.render('multiple.html', {

@@ -1,0 +1,144 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>上传</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection">
+    <link class="links" type="text/css" rel="stylesheet"
+          href="http://tui.source3g.com:8989/card/style.css?v=1456909015807"/>
+</head>
+<body>
+<div class="header">
+    <h1 class="logo">地产客户管理系统</h1>
+    <ul class="admin">
+        <li class="manage">
+            <a class="opts-hit" data-show-target=".manage-content">Admin<em></em></a>
+        </li>
+    </ul>
+</div>
+<div class="drop-down drop-arrow manage-content temp-box">
+    <ul class="width-140">
+        <li><a>商户中心</a></li>
+        <li><a class="opts-hit" data-dialog-template="tpl-modify-pass" data-title="修改密码" data-width="500">修改密码</a></li>
+        <li><a>退出</a></li>
+    </ul>
+</div>
+<!--修改密码-->
+<script id="tpl-modify-pass" type="text/html">
+    <form class="ajax-submit" data-source="data/ok.json" data-template="tpl-modify-pwd" data-target=".none"
+          data-close-dialog="true">
+        <div class="win-dialog modify-pass">
+            <p><label for="old-pwd">原密码：</label><input class="input-txt" type="password" name="oldPass" id="old-pwd"
+                                                       data-rule="required"/></p>
+
+            <p><label for="password">新密码：</label><input class="input-txt" type="password" name="password" id="password"
+                                                        data-rule="新密码:required;password"/></p>
+
+            <p><label for="confirm-pwd">确认新密码：</label><input class="input-txt" type="password" name="confirmPassword"
+                                                             id="confirm-pwd"
+                                                             data-rule="确认新密码:required;match[password]"/></p>
+        </div>
+        <div class="dialog-foot tags-foot">
+            <button class="btn-gray dialog-close" type="button">取消</button>
+            <button class="btn-blue" type="submit">确定</button>
+        </div>
+    </form>
+</script>
+<script id="tpl-modify-pwd" type="text/html">
+    {{if status}}
+    {{alert('success','修改成功,请重新登陆')}}
+    {{go('login.shtml')}}
+    {{else}}
+    {{alert('error',message)}}
+    {{/if}}
+</script>
+<div class="wrap">
+    <div class="slide-left">
+        <ul>
+            <li class="mange on">
+                <a>旺桌牌</a>
+                <ul>
+                    <li><a>门店管理</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="slide-children">
+        <dl>
+            <dt>旺桌牌管理</dt>
+            <dd>
+                <ul>
+                    <li class="opts-hit first-hit" data-template="tpl-add-seller" data-target=".render-box"><a>上传</a>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <div class="slide-right render-box"></div>
+</div>
+<!--添加商家-->
+<script type="text/html" id="tpl-add-seller">
+    <!--面包屑-->
+    <div class="crumb">{{if temp.type=='details'}}{{temp.title}}{{else}}添加商家{{/if}}</div>
+    <!--搜索条件-->
+    <form class="ajax-form" data-source="data/ok.json"
+          data-show-tips="true">
+        <input type="hidden" value="{{temp.id}}" name="id"/>
+
+        <div class="win-dialog win-merchants">
+            <ul class="list">
+                <li>
+                    <em>上传LOGO：</em>
+
+                    <div class="content clear-fix">
+                        <div class="logo upload-box" id="upload-box">
+                            <img src="{{photo}}">
+                        </div>
+                        <div class="btn-wrap" id="container">
+                            <div class="btn">
+                                <button type="button" class="upload-logo upload-file btn-blue"
+                                        data-source="<%= uptoken_url %>"
+                                        data-up-before="tpl-up-before"
+                                        data-up-ing="tpl-uploading"
+                                        data-up-after="tpl-up-after"
+                                        data-img-url="http://7xr4ej.com1.z0.glb.clouddn.com/"
+                                        data-swf="/scripts/up.swf"
+                                        data-target="upload-box"
+                                        data-number="1">浏览
+                                </button>
+                                <span class="error-tips"></span>
+                            </div>
+                            <p class="word">仅支持jpg、jpeg、gif、png格式，大小不超过1M</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</script>
+<!--上传前模板-->
+<script id="tpl-up-before" type="text/html">
+    <div class="up-item" id="{{id}}">
+        <span class="status">上传中</span>
+    </div>
+</script>
+<!--上传中-->
+<script id="tpl-uploading" type="text/html">
+    {{percentage}}
+</script>
+<!--上传后模板-->
+<script id="tpl-up-after" type="text/html">
+    <img src="{{if isImage}}<%= domain %>{{key}}?imageView2/5/w/64/h/64{{else}}images/default.png{{/if}}" alt=""/>
+    <input type="hidden" value="<%= domain %>{{key}}"/>
+</script>
+<!--footer-->
+<script type="text/javascript" src="http://uid.wangcaibao.com/wcb.js"
+        data-main="card/base.js?version=1456909015807"></script>
+</body>
+</html>
