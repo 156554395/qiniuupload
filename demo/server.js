@@ -2,6 +2,8 @@ var qiniu = require('qiniu');
 var express = require('express');
 var config = require('./config.js');
 var app = express();
+//var ui="http://uid.wangcaibao.com/";
+var ui="http://tui.source3g.com:8989/";
 
 app.configure(function() {
     app.use(express.static(__dirname + '/'));
@@ -70,7 +72,9 @@ app.get('/', function(req, res) {
 app.get('/test', function(req, res) {
     res.render('test.html', {
         domain: config.Domain,
-        uptoken_url: config.Uptoken_Url
+        uptoken_url: config.Uptoken_Url,
+        ui:ui,
+        version:new Date().getTime()
     });
 });
 
