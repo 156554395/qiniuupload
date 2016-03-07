@@ -11,7 +11,8 @@ $(function () {
         imgUrl = btn.attr('data-img-url'),
         uploadTarget = btn.attr('data-target'),
         swf = btn.attr('data-swf'),
-        number = btn.attr('data-number') || 50,
+        number = btn.attr('data-number') || 5000,
+        autoStart=btn.attr('data-auto-start')==="false"?false:true,
         tempArr={before: btn.attr('data-up-before'),ing:btn.attr('data-up-ing'),after:btn.attr('data-up-after')};
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
@@ -25,6 +26,7 @@ $(function () {
         uptoken_url: upUrl,
         domain: imgUrl,
         get_new_uptoken: false,
+        multi_selection:number>1?true:false,
         // downtoken_url: '/downtoken',
         unique_names: true,
         // save_key: true,
@@ -36,13 +38,13 @@ $(function () {
         //         return time;
         //     },
         // },
-        auto_start: true,
+        auto_start: autoStart,
         log_level: 5,
         init: {
             'FilesAdded': function (up, files) {
                 $('#success').hide();
                 plupload.each(files, function (file) {
-                    var progress = new FileProgress(file, uploadTarget,tempArr);
+                    var progress = new FileProgress(file, uploadTarget,tempArr,number);
                     progress.setStatus("等待...");
                     progress.bindUploadCancel(up);
                 });
@@ -67,7 +69,7 @@ $(function () {
                 progress.setComplete(up, info);
             },
             'Error': function (up, err, errTip) {
-                var progress = new FileProgress(file, uploadTarget,tempArr);
+                var progress = new FileProgress(err.file, uploadTarget,tempArr);
                 progress.setError();
                 progress.setStatus(errTip);
             }
@@ -79,4 +81,12 @@ $(function () {
             // }
         }
     });
+    //开始上传
+    $('body').on('click','.upload-start',function(){
+        uploader.start();
+    })
+    //取消上传
+    $('body').on('click','.upload-cancel',function(){
+        uploader.stop();
+    })
 });

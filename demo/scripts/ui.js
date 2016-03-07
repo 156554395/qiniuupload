@@ -1,6 +1,6 @@
 /*global plupload */
 /*global qiniu */
-function FileProgress(file, targetID,temp) {
+function FileProgress(file, targetID,temp,number) {
     this.fileProgressID = file.id;
     this.file = file;
     this.opacity = 100;
@@ -13,7 +13,11 @@ function FileProgress(file, targetID,temp) {
     if (!this.fileProgressWrapper.length) {
         var data = {fileName: file.name, id: file.id, fileSize: plupload.formatSize(file.size).toUpperCase()};
         var html = template(this.beforeTemp, data);
-        this.target.append(html);
+        if(number>1){
+            this.target.append(html);
+        }else{
+            this.target.html(html);
+        }
     } else {
         this.reset();
     }
@@ -83,9 +87,8 @@ FileProgress.prototype.setError = function () {
 };
 
 FileProgress.prototype.setCancelled = function (manual) {
-    var progressContainer = 'progressContainer';
     if (!manual) {
-        progressContainer += ' red';
+        this.fileProgressWrapper.find('.status').text('已取消')
     }
 };
 

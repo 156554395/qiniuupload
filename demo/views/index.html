@@ -40,8 +40,16 @@
     <div class="body">
         <div class="col-md-12">
             <div id="container">
-                <a class="btn btn-default btn-lg " id="upload-files"  data-target="file-list"  data-img-url="<%= domain %>"
-                   data-source="<%= uptoken_url %>" data-swf="/scripts/up.swf" data-up-before="tpl-up-before" data-up-ing="tpl-uploading" data-up-after="tpl-up-after">
+                <a class="btn btn-default btn-lg "
+                   id="upload-files"
+                   data-target="file-list"
+                   data-img-url="<%= domain %>"
+                   data-source="<%= uptoken_url %>"
+                   data-swf="/scripts/up.swf"
+                   data-number="1"
+                   data-up-before="tpl-up-before"
+                   data-up-ing="tpl-uploading"
+                   data-up-after="tpl-up-after">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>选择文件</span>
                 </a>
@@ -81,7 +89,7 @@
         <span class="name">{{fileName}}</span>
         <span class="status">准备上传</span>
         <span class="size">{{fileSize}}</span>
-        <span class="cancel">取消</span>
+        <span class="upload-cancel">取消</span>
     </div>
 </script>
 <!--上传中-->

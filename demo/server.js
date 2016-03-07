@@ -2,8 +2,8 @@ var qiniu = require('qiniu');
 var express = require('express');
 var config = require('./config.js');
 var app = express();
-//var ui="http://uid.wangcaibao.com/";
-var ui="http://tui.source3g.com:8989/";
+var ui="http://uid.wangcaibao.com/";
+//var ui="http://tui.source3g.com:8989/";
 
 app.configure(function() {
     app.use(express.static(__dirname + '/'));

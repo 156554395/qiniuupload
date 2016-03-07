@@ -611,6 +611,7 @@ function QiniuJsSDK() {
         // compose options with user passed options and default setting
         plupload.extend(option, op, {
             url: qiniuUploadUrl,
+            multi_selection: op.multi_selection,
             multipart_params: {
                 token: ''
             }
