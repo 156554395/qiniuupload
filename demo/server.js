@@ -69,6 +69,7 @@ app.get('/', function(req, res) {
         uptoken_url: config.Uptoken_Url
     });
 });
+//上传logo
 app.get('/test', function(req, res) {
     res.render('test.html', {
         domain: config.Domain,
@@ -77,7 +78,28 @@ app.get('/test', function(req, res) {
         version:new Date().getTime()
     });
 });
-
+//上传文件
+app.get('/upload', function(req, res) {
+    res.render('uploadfile.html', {
+        domain: config.Domain,
+        uptoken_url: config.Uptoken_Url,
+        ui:ui,
+        version:new Date().getTime()
+    });
+});
+//文件列表
+app.post('/list',function(req,res){
+    var data={status:true,message:'成功',title: "根目录",id: "1",results:[]};
+    var tempNum=parseInt(Math.random()*20),otherNum=tempNum-3;
+    for(var i=0;i<tempNum;i++){
+        var isFolder=i>otherNum?false:true;
+        var img= ui+'advert/img/'+(i>otherNum?"success":"folder")+'.png';
+        var name='文件'+(i>otherNum?'':'夹')+i;
+        var tempObj={id: i+new Date().getTime(), folder: isFolder, img:img, name:name};
+        data.results.push(tempObj)
+    }
+    res.json(data);
+})
 app.get('/multiple', function(req, res) {
     res.render('multiple.html', {
         domain: config.Domain,
