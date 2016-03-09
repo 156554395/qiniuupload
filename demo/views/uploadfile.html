@@ -82,6 +82,7 @@
     </div>
     <div class="slide-right render-box"></div>
 </div>
+<div id="upload-box"></div>
 <!--素材管理-->
 <script type="text/html" id="tpl-material">
     <!--面包屑-->
@@ -92,14 +93,17 @@
         <form class="ajax-form" data-source="list" data-template="tpl-material-tag|tpl-material-list"
               data-target=".tag-box|.material-box" data-first-submit="true">
             <div class="left-btn-group f-left" id="container">
-                <a class="upload"
+                <a class="upload upload-file"
                    data-source="<%= uptoken_url %>"
+                   data-target="upload-list"
+                   data-dialog-template="tpl-upload-dialog"
+                   data-title="文件上传"
                    data-up-before="tpl-up-before"
                    data-up-ing="tpl-uploading"
                    data-up-after="tpl-up-after"
                    data-img-url="http://7xr4ej.com1.z0.glb.clouddn.com/"
                    data-swf="/scripts/up.swf"
-                   data-target="upload-box"
+                   data-auto-start="true"
                         >上传</a>
                 <a class="refresh opts-hit" data-template="tpl-refresh" data-target=".none"></a>
             </div>
@@ -167,6 +171,13 @@
 <!--刷新-->
 <script type="text/html" id="tpl-refresh">
     {{sendAjax($('.path-link:last'))}}
+</script>
+<!--上传弹窗-->
+<script id="tpl-upload-dialog" type="text/html">
+    <form class="edit-add" data-source="data/ok.json" data-show-tips="true" data-close-dialog="true">
+        <p>上传到：</p>
+        <div id="upload-list"></div>
+    </form>
 </script>
 <!--上传前模板-->
 <script id="tpl-up-before" type="text/html">
