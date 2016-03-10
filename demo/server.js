@@ -100,6 +100,11 @@ app.post('/list',function(req,res){
     }
     res.json(data);
 })
+//保存文件
+app.post('/save',function(req,res){
+    var data={status:true,message:'成功'};
+    res.json(data);
+})
 app.get('/multiple', function(req, res) {
     res.render('multiple.html', {
         domain: config.Domain,

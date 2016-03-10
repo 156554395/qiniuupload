@@ -172,9 +172,17 @@
 <script type="text/html" id="tpl-refresh">
     {{sendAjax($('.path-link:last'))}}
 </script>
+<!--表单提交-->
+<script id="tpl-submit" type="text/html">
+{{if status}}
+{{$('.refresh,.dialog-close').trigger('click')}}
+{{else}}
+{{message}}
+{{/if}}
+</script>
 <!--上传弹窗-->
 <script id="tpl-upload-dialog" type="text/html">
-    <form class="edit-add" data-source="data/ok.json" data-show-tips="true" data-close-dialog="true">
+    <form class="edit-add" data-source="/save" data-template="tpl-submit" data-target=".file-error-tips">
         <div class="upload-box">
             <div class="list-status">
                 <span class="name">名称</span>
@@ -184,6 +192,8 @@
             </div>
             <div id="upload-list" class="file-list"></div>
         </div>
+        <div class="file-error-tips"></div>
+        <input type="hidden" name="pathId" value="{{$('.path-link.on').data('parm').id}}"/>
         <div class="dialog-foot">
             <span id="success" class="file-tips un-dis">队列全部文件处理完毕，点击确定完成上传</span>
             <button class="btn-blue btn-confirm" type="submit" disabled>确定</button>
