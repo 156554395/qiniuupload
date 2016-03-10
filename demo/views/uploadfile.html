@@ -175,14 +175,28 @@
 <!--上传弹窗-->
 <script id="tpl-upload-dialog" type="text/html">
     <form class="edit-add" data-source="data/ok.json" data-show-tips="true" data-close-dialog="true">
-        <p>上传到：</p>
-        <div id="upload-list"></div>
+        <div class="upload-box">
+            <div class="list-status">
+                <span class="name">名称</span>
+                <span class="status">状态</span>
+                <span class="size">大小</span>
+                <span class="opts">操作</span>
+            </div>
+            <div id="upload-list" class="file-list"></div>
+        </div>
+        <div class="dialog-foot">
+            <span id="success" class="file-tips un-dis">队列全部文件处理完毕，点击确定完成上传</span>
+            <button class="btn-blue btn-confirm" type="submit" disabled>确定</button>
+        </div>
     </form>
 </script>
 <!--上传前模板-->
 <script id="tpl-up-before" type="text/html">
     <div class="up-item" id="{{id}}">
-        <span class="status">上传中</span>
+        <span class="name">{{fileName}}</span>
+        <span class="status">准备上传</span>
+        <span class="size">{{fileSize}}</span>
+        <span class="opts"></span>
     </div>
 </script>
 <!--上传中-->
@@ -191,8 +205,10 @@
 </script>
 <!--上传后模板-->
 <script id="tpl-up-after" type="text/html">
-    <img src="{{if isImage}}<%= domain %>{{key}}?imageView2/5/w/64/h/64{{else}}images/default.png{{/if}}" alt=""/>
-    <input type="hidden" value="<%= domain %>{{key}}"/>
+    <span class="name">{{fileName}}<input type="hidden" name="fileName" value="<%= domain %>{{key}}"/></span>
+    <span class="status">已上传</span>
+    <span class="size">{{fileSize}}</span>
+    <span class="opts"></span>
 </script>
 <!--footer-->
 <script type="text/javascript" src="<%=ui%>wcb.js"
