@@ -24,7 +24,8 @@ app.get('/uptoken', function(req, res, next) {
     res.header("Expires", 0);
     if (token) {
         res.json({
-            uptoken: token
+            status:true,
+            data: token
         });
     }
 });

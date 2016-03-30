@@ -1,5 +1,6 @@
 /*global plupload */
 /*global qiniu */
+var subscript=0;
 function FileProgress(file, targetID,temp,number) {
     this.fileProgressID = file.id;
     this.file = file;
@@ -10,6 +11,7 @@ function FileProgress(file, targetID,temp,number) {
     this.beforeTemp=temp['before'];
     this.ing=temp['ing'];
     this.aftereTemp=temp['after'];
+    this.subscript=subscript;
     if (!this.fileProgressWrapper.length) {
         var data = {fileName: file.name, id: file.id, fileSize: plupload.formatSize(file.size).toUpperCase()};
         var html = template(this.beforeTemp, data);
@@ -80,6 +82,10 @@ FileProgress.prototype.setComplete = function (up, info) {
         return false;
     };
     data['isImage']=isImage(data['key']);
+    data['fileSize']=this.fileSize;
+    data['fileName']=this.fileName;
+    data['subscript']=this.subscript;
+    subscript++;
     var html=template(this.aftereTemp,data);
     this.fileProgressWrapper.html(html);
 };

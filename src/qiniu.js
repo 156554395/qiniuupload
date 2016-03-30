@@ -531,7 +531,7 @@ function QiniuJsSDK() {
                 ajax.onreadystatechange = function() {
                     if (ajax.readyState === 4 && ajax.status === 200) {
                         var res = that.parseJSON(ajax.responseText);
-                        that.token = res.uptoken;
+                        that.token = res.data;
                     }
                 };
                 ajax.send();

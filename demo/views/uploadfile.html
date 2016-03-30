@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="telephone=no" name="format-detection">
     <link class="links" type="text/css" rel="stylesheet"
-          href="<%=ui%>advert/style.css?v=<%=version%>"/>
+          href="<%=ui%>card/style.css?v=<%=version%>"/>
 </head>
 <body>
 <div class="header">
@@ -215,13 +215,16 @@
 </script>
 <!--上传后模板-->
 <script id="tpl-up-after" type="text/html">
-    <span class="name">{{fileName}}<input type="hidden" name="fileName" value="<%= domain %>{{key}}"/></span>
+    <input type="hidden" name="oldName[{{subscript}}]" value="{{fileName}}"/>
+    <input type="hidden" name="size[{{subscript}}]" value="{{fileSize}}"/>
+    <input type="hidden" name="extension[{{subscript}}]" value="{{fileName.split('.')[1]}}"/>
+    <span class="name">{{fileName}}<input type="hidden" name="fileName[{{subscript}}]" value="<%= domain %>{{key}}"/></span>
     <span class="status">已上传</span>
     <span class="size">{{fileSize}}</span>
     <span class="opts"></span>
 </script>
 <!--footer-->
 <script type="text/javascript" src="<%=ui%>wcb.js"
-        data-main="advert/base.js?version=<%=version%>"></script>
+        data-main="card/base.js?version=<%=version%>"></script>
 </body>
 </html>
