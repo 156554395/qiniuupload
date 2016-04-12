@@ -182,7 +182,7 @@
 </script>
 <!--上传弹窗-->
 <script id="tpl-upload-dialog" type="text/html">
-    <form class="edit-add" data-source="/save" data-template="tpl-submit" data-target=".file-error-tips">
+    <form class="up-form" data-replace=".up-form" data-replace-row=".up-item" data-source="/save" data-template="tpl-submit" data-target=".file-error-tips">
         <div class="upload-box">
             <div class="list-status">
                 <span class="name">名称</span>
@@ -215,10 +215,10 @@
 </script>
 <!--上传后模板-->
 <script id="tpl-up-after" type="text/html">
-    <input type="hidden" name="oldName[{{subscript}}]" value="{{fileName}}"/>
-    <input type="hidden" name="size[{{subscript}}]" value="{{fileSize}}"/>
-    <input type="hidden" name="extension[{{subscript}}]" value="{{fileName.split('.')[1]}}"/>
-    <span class="name">{{fileName}}<input type="hidden" name="fileName[{{subscript}}]" value="<%= domain %>{{key}}"/></span>
+    <input class="replace-obj" type="hidden" name="oldName[{{subscript}}]" value="{{fileName}}"/>
+    <input class="replace-obj" type="hidden" name="size[{{subscript}}]" value="{{fileSize}}"/>
+    <input class="replace-obj" type="hidden" name="extension[{{subscript}}]" value="{{fileName.split('.')[fileName.split('.').length-1]}}"/>
+    <span class="name">{{fileName}}<input class="replace-obj" type="hidden" name="fileName[{{subscript}}]" value="<%= domain %>{{key}}"/></span>
     <span class="status">已上传</span>
     <span class="size">{{fileSize}}</span>
     <span class="opts"></span>
