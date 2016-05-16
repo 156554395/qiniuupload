@@ -28,7 +28,7 @@ $(function () {
         get_new_uptoken: false,
         multi_selection:number>1?true:false,
         // downtoken_url: '/downtoken',
-        unique_names: true,
+        unique_names: false,
         // save_key: true,
         // x_vars: {
         //     'id': '1234',
