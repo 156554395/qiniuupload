@@ -121,4 +121,5 @@ var uptoken = new qiniu.rs.PutPolicy(config.Bucket_Name);
 
 app.listen(config.Port, function() {
     console.log('Listening on port %d', config.Port);
+    console.log('http://demo.wangcaibao.com:'+config.Port);
 });
